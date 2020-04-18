@@ -113,6 +113,7 @@ namespace SortElite
                     return result;
                 })
                 .ToList();
+            filtered = filtered.Except(groupedModel.Broken.Files).ToList();
 
 
             foreach (var rule in configuration.Rules)
@@ -139,10 +140,13 @@ namespace SortElite
             var flatGrouped = groupedModel.Folders
                 .SelectMany(x => x.Files)
                 .ToArray();
+            var flatBroken = groupedModel.Folders
+                .SelectMany(x => x.Files)
+                .ToArray();
             groupedModel.Unknown = new FolderModel
             {
                 Name = "Unknown",
-                Files = filtered.Except(flatGrouped).ToList()
+                Files = filtered.Except(flatGrouped).Except(flatBroken).ToList()
             };
 
             return groupedModel;
