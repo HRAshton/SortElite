@@ -16,10 +16,10 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Name="Cfg" Text="TextBox" AcceptsReturn="True" TextWrapping="NoWrap" VerticalAlignment="Top" Height="414" VerticalScrollBarVisibility="Visible" Margin="10,10,10,0" Grid.RowSpan="2" />
+        <TextBox Name="Cfg" Text="TextBox" AcceptsReturn="True" TextWrapping="NoWrap" VerticalScrollBarVisibility="Visible" Grid.RowSpan="2" />
         <Button Content="Check" Click="Button_Click" Grid.Column="1"/>
-        <TextBox Name="Preview" Text="TextBox" TextWrapping="NoWrap" AcceptsReturn="True" VerticalAlignment="Top" Height="414" Margin="10,10,10,0" VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.RowSpan="2"/>
-        <Button Content="Compile" Click="Compile" Grid.Column="1" Grid.Row="1"/>
+        <TextBox Name="Preview" Text="TextBox" TextWrapping="NoWrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Grid.Column="2" Grid.RowSpan="2"/>
+        <Button Content="Compile" Grid.Column="1" Grid.Row="1" Click="Button_Click_1"/>
 
     </Grid>
 </Window>

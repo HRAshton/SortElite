@@ -4,6 +4,6 @@ namespace SortElite.Models
 {
     public class ConfigurationModel
     {
-        public List<RuleModel> Rules { get; set; }
+        public List<RuleModel> Rules { get; set; } = new List<RuleModel>();
     }
 }

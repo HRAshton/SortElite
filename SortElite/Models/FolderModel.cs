@@ -5,8 +5,8 @@ namespace SortElite.Models
 {
     public class FolderModel
     {
-        public string Name {get;set;}
-        
-        public List<FileInfo> Files { get; set; }
+        public string Name { get; set; }
+
+        public List<FileInfo> Files { get; set; } = new List<FileInfo>();
     }
 }
