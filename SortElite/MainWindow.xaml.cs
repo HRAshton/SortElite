@@ -49,6 +49,7 @@ namespace SortElite
 
             var lines = new List<string>();
             ProcessRule(ref lines, folders.Unknown);
+            ProcessRule(ref lines, folders.Broken);
             foreach (var rule in folders.Folders.OrderBy(x => x.Name))
             {
                 ProcessRule(ref lines, rule);

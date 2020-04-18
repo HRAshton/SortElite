@@ -22,6 +22,7 @@ namespace SortElite.Extensions
             fileSystemInfo.Attributes = FileAttributes.Normal;
             fileSystemInfo.Refresh();
             fileSystemInfo.Delete();
+            fileSystemInfo.Refresh();
         }
     }
 }

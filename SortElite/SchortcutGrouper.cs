@@ -55,7 +55,7 @@ namespace SortElite
             }
 
             config.Rules.Add(currentRule);
-            
+
             return config;
         }
 
@@ -93,6 +93,26 @@ namespace SortElite
                     }
                 }
             }
+
+
+            groupedModel.Broken.Files = filtered.Where(fileInfo =>
+                {
+                    if (!fileInfo.Extension.Equals(".lnk", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return false;
+                    }
+
+                    var lnkToFile = LnkToFile(fileInfo.FullName);
+                    if (lnkToFile == null)
+                    {
+                        return false; // Cannot check "empty" links.
+                    }
+
+                    var result = !File.Exists(lnkToFile);
+
+                    return result;
+                })
+                .ToList();
 
 
             foreach (var rule in configuration.Rules)
@@ -134,12 +154,7 @@ namespace SortElite
 
             targetFolder.Create();
 
-            foreach (var fileInfo in groupedModel.Unknown.Files)
-            {
-                fileInfo.CopyTo(Path.Combine(targetFolder.FullName, fileInfo.Name));
-            }
-
-            foreach (var folderModel in groupedModel.Folders)
+            foreach (var folderModel in groupedModel.Folders.Concat(new[] { groupedModel.Unknown, groupedModel.Broken }))
             {
                 var folder = targetFolder.CreateSubdirectory(folderModel.Name);
 
@@ -150,6 +165,18 @@ namespace SortElite
                     File.SetAttributes(destFileName, FileAttributes.Normal);
                 }
             }
+        }
+
+
+        private static string LnkToFile(string fileLink)
+        {
+            var path = File.ReadAllText(fileLink)
+                .Split("\0", StringSplitOptions.RemoveEmptyEntries)
+                .Where(x => x.Length > 5 && x.Contains(":\\"))
+                .OrderBy(x => x.Length)
+                .LastOrDefault();
+
+            return path;
         }
     }
 }

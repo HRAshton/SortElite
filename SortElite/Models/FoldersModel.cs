@@ -8,6 +8,8 @@ namespace SortElite.Models
 
         public FolderModel Removed { get; set; } = new FolderModel {Name = "Removed"};
 
+        public FolderModel Broken { get; set; } = new FolderModel {Name = "Broken"};
+
         public List<FolderModel> Folders { get; set; } = new List<FolderModel>();
     }
 }
